@@ -7,16 +7,14 @@ use App\Repositories\Contracts\TravelOrderRepositoryInterface;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
-class TravelOrderRepository implements TravelOrderRepositoryInterface
+class TravelOrderRepository extends EloquentRepository implements TravelOrderRepositoryInterface
 {
-    private $model;
-
     public function __construct()
     {
         $this->model = $this->resolveModel();
     }
 
-    public function resolveModel(): Model
+    protected function resolveModel(): Model
     {
         return app(TravelOrder::class);
     }
