@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Models\OrderStatus;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreTravelOrderRequest extends FormRequest

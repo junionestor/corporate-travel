@@ -14,8 +14,7 @@ class TravelOrderService
 {
     public function __construct(
         private readonly TravelOrderRepositoryInterface $travelOrderRepository
-    ) {
-    }
+    ) {}
 
     public function createOrder(array $request): void
     {
@@ -78,7 +77,7 @@ class TravelOrderService
         }
 
         if ($request->has('destination')) {
-            $travelOrders->where('destination', 'like', '%' . $request->get('destination') . '%');
+            $travelOrders->where('destination', 'like', '%'.$request->get('destination').'%');
         }
 
         return $travelOrders
@@ -95,7 +94,7 @@ class TravelOrderService
             ->first();
 
         if (
-            !$travelOrder
+            ! $travelOrder
             || $travelOrder?->start_date?->diffInDays(now()) > 7
         ) {
             throw new CanceledOrderException;
