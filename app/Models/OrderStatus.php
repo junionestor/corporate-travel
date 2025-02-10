@@ -9,4 +9,8 @@ class OrderStatus extends Model
 {
     /** @use HasFactory<\Database\Factories\OrderStatusFactory> */
     use HasFactory;
+
+    public const APPROVED = 2;
+
+    public const CANCELED = 3;
 }

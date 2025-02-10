@@ -10,8 +10,26 @@ class TravelOrder extends Model
     /** @use HasFactory<\Database\Factories\TravelOrderFactory> */
     use HasFactory;
 
+    protected $fillable = [
+        'travel_order_id',
+        'name',
+        'destination',
+        'user_id',
+        'start_date',
+        'end_date',
+        'order_status_id',
+    ];
+
     public function orderStatus()
     {
         return $this->belongsTo(OrderStatus::class);
+    }
+
+    public function casts(): array
+    {
+        return [
+            'start_date' => 'datetime',
+            'end_date' => 'datetime',
+        ];
     }
 }
