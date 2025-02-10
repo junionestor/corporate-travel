@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\OrderStatus;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreTravelOrderRequest extends FormRequest
@@ -29,5 +30,27 @@ class StoreTravelOrderRequest extends FormRequest
             'end_date' => ['required', 'date'],
             'order_status_id' => ['required', 'exists:order_statuses,id'],
         ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'order_status_id.exists' => 'The order status does not exist.',
+        ];
+    }
+
+    /**
+     * Prepare the data for validation.
+     */
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'user_id' => $this->user()->id,
+        ]);
     }
 }
