@@ -13,10 +13,17 @@ class OrderStatusSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table(OrderStatus::class)->updateOrInsert([
-            ['id' => 1, 'name' => 'Solicitado'],
-            ['id' => 2, 'name' => 'Aprovado'],
-            ['id' => 3, 'name' => 'Cancelado'],
-        ]);
+        DB::table('order_statuses')->updateOrInsert(
+            ['id' => 1],
+                ['name' => 'Solicitado'],
+        );
+        DB::table('order_statuses')->updateOrInsert(
+            ['id' => 2,],
+                ['name' => 'Aprovado'],
+        );
+        DB::table('order_statuses')->updateOrInsert(
+            ['id' => 3,],
+                ['name' => 'Cancelado'],
+        );
     }
 }
