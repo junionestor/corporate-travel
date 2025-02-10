@@ -18,9 +18,6 @@ return new class extends Migration
             $table->string('destination');
             $table->date('start_date');
             $table->date('end_date');
-            $table->foreignId('order_status_id')
-                ->default(1)
-                ->constrained();
             $table->timestamps();
         });
     }
