@@ -24,15 +24,6 @@ Este projeto é um microsserviço desenvolvido em Laravel para gerenciar pedidos
     cd corporate-travel
     ```
 
-### Executar o Serviço Localmente (usando Docker)
-
-1. Certifique-se de ter o Docker instalado e em execução.
-
-2. Crie e inicie os containers:
-    ```sh
-    docker compose up -d
-    ```
-
 ### Configurar o Ambiente
 
 1. Copie o arquivo [.env.example](.env.example) para .env:
@@ -40,27 +31,32 @@ Este projeto é um microsserviço desenvolvido em Laravel para gerenciar pedidos
     cp .env.example .env
     ```
 
-2. Instale as dependências:
+2. Crie e inicie os containers:
+    ```sh
+    docker compose up -d
+    ```
+
+3. Instale as dependências:
     ```bash
     docker compose exec laravel.test composer install
     ```
 
-3. Gere a chave da aplicação:
+4. Gere a chave da aplicação:
     ```sh
     vendor/bin/sail php artisan key:generate
     ```
 
-4. Execute as migrations e os seeders do banco de dados:
+5. Execute as migrations e os seeders do banco de dados:
     ```sh
     vendor/bin/sail php artisan migrate:fresh --seed
     ```
 
-5. Suba o servidor com o sail
+6. Suba o servidor com o sail
     ```sh
     vendor/bin/sail up -d
     ```
 
-6. Pronto! A aplicação já está executando em http://localhost
+Pronto! A aplicação já está executando em http://localhost
 
 
 ### Executar os Testes
