@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\CanceledOrderException;
 use App\Http\Requests\IndexTravelOrderRequest;
 use App\Http\Requests\StoreTravelOrderRequest;
 use App\Http\Requests\UpdateTravelOrderRequest;
@@ -228,6 +229,11 @@ class TravelOrderController extends Controller
             return response()->json(
                 ['message' => 'Travel order updated successfully'],
                 Response::HTTP_OK
+            );
+        } catch (CanceledOrderException $e) {
+            return response()->json(
+                ['message' => $e->getMessage()],
+                $e->getCode()
             );
         } catch (\Exception $e) {
             return response()->json(
