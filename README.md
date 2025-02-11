@@ -55,7 +55,12 @@ Este projeto é um microsserviço desenvolvido em Laravel para gerenciar pedidos
     vendor/bin/sail php artisan migrate:fresh --seed
     ```
 
-5. Pronto! A aplicação já está executando em http://localhost
+5. Suba o servidor com o sail
+    ```sh
+    vendor/bin/sail up -d
+    ```
+
+6. Pronto! A aplicação já está executando em http://localhost
 
 
 ### Executar os Testes
