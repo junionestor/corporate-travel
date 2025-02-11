@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Repositories\Contracts\OrderStatusRepositoryInterface;
 use App\Repositories\Contracts\TravelOrderRepositoryInterface;
+use App\Repositories\Eloquent\OrderStatusRepository;
 use App\Repositories\Eloquent\TravelOrderRepository;
 use Illuminate\Support\ServiceProvider;
 
@@ -16,6 +18,11 @@ class RepositoryProvider extends ServiceProvider
         $this->app->bind(
             TravelOrderRepositoryInterface::class,
             TravelOrderRepository::class
+        );
+
+        $this->app->bind(
+            OrderStatusRepositoryInterface::class,
+            OrderStatusRepository::class
         );
     }
 

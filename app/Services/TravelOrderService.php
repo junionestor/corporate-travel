@@ -30,7 +30,7 @@ class TravelOrderService
             ->where('travel_order_id', $request['travel_order_id'])
             ->first();
 
-        if ($request['travel_order_id'] === OrderStatus::CANCELED) {
+        if ((int) $request['order_status_id'] === OrderStatus::CANCELED) {
             $this->cancelOrder($request['travel_order_id']);
 
             return;
@@ -40,10 +40,11 @@ class TravelOrderService
 
         $this->travelOrderRepository->update(
             $travelOrder->id,
-            $request['order_status_id']
+            $request
         );
 
-        auth()->user()->notify(new OrderApprovedNotification($travelOrder));
+        auth()->user()
+            ->notify(new OrderApprovedNotification($travelOrder));
     }
 
     public function showOrder($travelOrderId)
@@ -64,8 +65,8 @@ class TravelOrderService
         $user = Auth::user();
         $travelOrders = $this->travelOrderRepository->query();
 
-        if ($request->has('status')) {
-            $travelOrders->where('order_status_id', $request->get('status'));
+        if ($request->has('order_status_id')) {
+            $travelOrders->where('order_status_id', $request->get('order_status_id'));
         }
 
         if ($request->has('start_date') || $request->get('end_date')) {
@@ -90,12 +91,11 @@ class TravelOrderService
         $travelOrder = $this->travelOrderRepository
             ->query()
             ->where('travel_order_id', $travelOrderId)
-            ->where('order_status_id', OrderStatus::APPROVED)
             ->first();
 
         if (
             ! $travelOrder
-            || $travelOrder?->start_date?->diffInDays(now()) > 7
+            || $travelOrder?->created_at?->diffInDays(now()) > 7
         ) {
             throw new CanceledOrderException;
         }
@@ -107,7 +107,8 @@ class TravelOrderService
             ['order_status_id' => OrderStatus::CANCELED]
         );
 
-        auth()->user()->notify(new OrderCanceledNotification($travelOrder));
+        auth()->user()
+            ->notify(new OrderCanceledNotification($travelOrder));
     }
 
     private function dateFilter($query, $start = null, $end = null)

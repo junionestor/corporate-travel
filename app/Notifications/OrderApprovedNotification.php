@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Models\TravelOrder;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
@@ -34,9 +35,11 @@ class OrderApprovedNotification extends Notification
     {
         return (new MailMessage)
             ->success()
-            ->greeting("Olá {$this->name}!")
-            ->line("O seu pedido {$this->travelOrder->ordtravel_order_ider} foi aprovado!")
-            ->line('Qualquer dúvida entre em contado com o suporte!');
+            ->subject("Pedido {$this->travelOrder->travel_order_id} aprovado")
+            ->greeting("Olá {$notifiable->name}!")
+            ->line("O seu pedido {$this->travelOrder->travel_order_id} foi aprovado!")
+            ->line('Qualquer dúvida entre em contado com o suporte!')
+            ->salutation('Obrigado por escolher a nossa plataforma!');
     }
 
     /**

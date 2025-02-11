@@ -24,12 +24,4 @@ class TravelOrder extends Model
     {
         return $this->belongsTo(OrderStatus::class);
     }
-
-    public function casts(): array
-    {
-        return [
-            'start_date' => 'datetime',
-            'end_date' => 'datetime',
-        ];
-    }
 }

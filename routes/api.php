@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\OrderStatusController;
 use App\Http\Controllers\TravelOrderController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -18,4 +19,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/order', [TravelOrderController::class, 'index']);
     Route::get('/order/{id}', [TravelOrderController::class, 'show']);
     Route::patch('/order', [TravelOrderController::class, 'update']);
+
+    Route::get('/order-status', [OrderStatusController::class, 'index']);
 });

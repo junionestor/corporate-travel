@@ -6,27 +6,40 @@ use Illuminate\Foundation\Http\FormRequest;
 
 /**
  * @OA\Schema(
- *     schema="UpdateTravelOrderRequest",
+ *     schema="IndexTravelOrderRequest",
  *     type="object",
- *     title="Update Travel Order Request",
- *     description="Request body for updating a travel order",
- *     required={"travel_order_id", "order_status_id"},
+ *     title="Index Travel Order Request",
+ *     description="Request parameters for indexing travel orders",
  *
- *     @OA\Property(
- *         property="travel_order_id",
- *         type="string",
- *         description="ID of the travel order",
- *         example=1
- *     ),
  *     @OA\Property(
  *         property="order_status_id",
  *         type="integer",
  *         description="ID of the order status",
- *         example=2
+ *         example=1
+ *     ),
+ *     @OA\Property(
+ *         property="start_date",
+ *         type="string",
+ *         format="date",
+ *         description="Start date of the travel order",
+ *         example="2025-02-10"
+ *     ),
+ *     @OA\Property(
+ *         property="end_date",
+ *         type="string",
+ *         format="date",
+ *         description="End date of the travel order",
+ *         example="2025-01-28"
+ *     ),
+ *     @OA\Property(
+ *         property="destination",
+ *         type="string",
+ *         description="Destination of the travel order",
+ *         example="Belo Horizonte"
  *     )
  * )
  */
-class UpdateTravelOrderRequest extends FormRequest
+class IndexTravelOrderRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -44,15 +57,19 @@ class UpdateTravelOrderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'travel_order_id' => [
-                'required',
-                'exists:travel_orders,travel_order_id',
-            ],
             'order_status_id' => [
                 'integer',
-                'required',
                 'exists:order_statuses,id',
             ],
+            'start_date' => [
+                'date',
+                'date_format:Y-m-d',
+            ],
+            'end_date' => [
+                'date',
+                'date_format:Y-m-d',
+            ],
+            'destination' => ['string'],
         ];
     }
 
@@ -64,7 +81,6 @@ class UpdateTravelOrderRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'travel_order_id.exists' => 'The travel order does not exist.',
             'order_status_id.exists' => 'The order status does not exist.',
         ];
     }

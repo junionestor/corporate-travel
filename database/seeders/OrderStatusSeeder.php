@@ -14,15 +14,27 @@ class OrderStatusSeeder extends Seeder
     {
         DB::table('order_statuses')->updateOrInsert(
             ['id' => 1],
-            ['name' => 'Solicitado'],
+            [
+                'name' => 'Solicitado',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         );
         DB::table('order_statuses')->updateOrInsert(
             ['id' => 2],
-            ['name' => 'Aprovado'],
+            [
+                'name' => 'Aprovado',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         );
         DB::table('order_statuses')->updateOrInsert(
             ['id' => 3],
-            ['name' => 'Cancelado'],
+            [
+                'name' => 'Cancelado',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
         );
     }
 }

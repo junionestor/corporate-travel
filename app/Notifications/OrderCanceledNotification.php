@@ -34,9 +34,12 @@ class OrderCanceledNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->greeting("Olá {$this->name}!")
-            ->line("O seu pedido {$this->travelOrder->ordtravel_order_ider} foi cancelado.")
-            ->line('Qualquer dúvida entre em contado com o suporte!');
+            ->error()
+            ->subject("Pedido {$this->travelOrder->travel_order_id} cancelado")
+            ->greeting("Olá {$notifiable->name}!")
+            ->line("O seu pedido {$this->travelOrder->travel_order_id} foi cancelado.")
+            ->line('Qualquer dúvida entre em contado com o suporte!')
+            ->salutation('Obrigado por escolher a nossa plataforma!');
     }
 
     /**

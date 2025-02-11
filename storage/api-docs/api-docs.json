@@ -1,10 +1,683 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Example for response examples value",
+        "title": "Corporate Travel API",
         "version": "1.0"
     },
+    "servers": [
+        {
+            "url": "/api"
+        }
+    ],
     "paths": {
-        "/api": {}
-    }
+        "/api": {},
+        "/api/register": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Register a new user",
+                "operationId": "8a56853624e025573120a09a4c75d468",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "password",
+                                    "password_confirmation"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Sova"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "sova@example.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "password123"
+                                    },
+                                    "password_confirmation": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "password123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "User created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "user": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Sova"
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "example": "sova@example.com"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2023-10-01T12:00:00Z"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2023-10-01T12:00:00Z"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "token": {
+                                            "type": "string",
+                                            "example": "1|abcde12345"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The given data was invalid."
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Login a user",
+                "operationId": "a3b306d14572d1f4bd6c064b3233e7b8",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "sova@example.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "password123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User logged in successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "user": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Sova"
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "example": "sova@example.com"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2023-10-01T12:00:00Z"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2023-10-01T12:00:00Z"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "token": {
+                                            "type": "string",
+                                            "example": "1|abcde12345"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid credentials",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Credenciais inválidas"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/logout": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Logout the authenticated user",
+                "operationId": "fe8f3429cd6979b3b4517e186505f9f9",
+                "responses": {
+                    "200": {
+                        "description": "User logged out successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Deslogado"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/order-status": {
+            "get": {
+                "tags": [
+                    "Order Status"
+                ],
+                "summary": "Get order statuses",
+                "operationId": "787e4af719b74a7bfbc0a81d3afd58eb",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "Solicitado"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "Solicitado"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "2025-02-10T00:00:00.000000Z"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "example": "2025-02-11T00:00:00.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failed to get order statuses"
+                    }
+                }
+            }
+        },
+        "/order": {
+            "get": {
+                "tags": [
+                    "Travel Orders"
+                ],
+                "summary": "Get a list of travel orders",
+                "operationId": "79f8e01e280e065259998dc4fd572ecd",
+                "parameters": [
+                    {
+                        "name": "order_status_id",
+                        "in": "query",
+                        "description": "Status ID of the travel order",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": 1
+                    },
+                    {
+                        "name": "start_date",
+                        "in": "query",
+                        "description": "Start date of the travel order",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "date"
+                        },
+                        "example": "2025-02-10"
+                    },
+                    {
+                        "name": "end_date",
+                        "in": "query",
+                        "description": "End date of the travel order",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "date"
+                        },
+                        "example": "2025-01-28"
+                    },
+                    {
+                        "name": "destination",
+                        "in": "query",
+                        "description": "Destination of the travel order",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "Belo Horizonte"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/IndexTravelOrderRequest"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failed to get travel orders"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Travel Orders"
+                ],
+                "summary": "Store a newly created travel order",
+                "operationId": "5e6258945f19dc3c6928f7c020bc531c",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreTravelOrderRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Travel order created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Travel order created successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failed to create travel order"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Travel Orders"
+                ],
+                "summary": "Update the specified travel order",
+                "operationId": "58b913d4eabc1d97c9341d71071377d9",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateTravelOrderRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Travel order updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Travel order updated successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failed to update travel order"
+                    }
+                }
+            }
+        },
+        "/order/{id}": {
+            "get": {
+                "tags": [
+                    "Travel Orders"
+                ],
+                "summary": "Display the specified travel order",
+                "operationId": "023ab9ab51f0cde319d174a80b3b9b62",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the travel order",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "travel_order_id": {
+                                            "type": "string",
+                                            "example": 1
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "Reyna"
+                                        },
+                                        "destination": {
+                                            "type": "string",
+                                            "example": "Los Angeles"
+                                        },
+                                        "start_date": {
+                                            "type": "string",
+                                            "example": "2025-02-10"
+                                        },
+                                        "end_date": {
+                                            "type": "string",
+                                            "example": "2022-02-28"
+                                        },
+                                        "order_status_id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "2025-02-10T12:00:00Z"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "example": "2025-02-28T12:00:00Z"
+                                        },
+                                        "user_id": {
+                                            "type": "integer",
+                                            "example": "1"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failed to show travel order"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "IndexTravelOrderRequest": {
+                "title": "Index Travel Order Request",
+                "description": "Request parameters for indexing travel orders",
+                "properties": {
+                    "order_status_id": {
+                        "description": "ID of the order status",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "start_date": {
+                        "description": "Start date of the travel order",
+                        "type": "string",
+                        "format": "date",
+                        "example": "2025-02-10"
+                    },
+                    "end_date": {
+                        "description": "End date of the travel order",
+                        "type": "string",
+                        "format": "date",
+                        "example": "2025-01-28"
+                    },
+                    "destination": {
+                        "description": "Destination of the travel order",
+                        "type": "string",
+                        "example": "Belo Horizonte"
+                    }
+                },
+                "type": "object"
+            },
+            "StoreTravelOrderRequest": {
+                "title": "Store Travel Order Request",
+                "description": "Request body for storing a travel order",
+                "required": [
+                    "travel_order_id",
+                    "name",
+                    "destination",
+                    "start_date",
+                    "end_date",
+                    "order_status_id"
+                ],
+                "properties": {
+                    "travel_order_id": {
+                        "description": "ID of the travel order",
+                        "type": "string",
+                        "example": "1"
+                    },
+                    "name": {
+                        "description": "Name of the traveler",
+                        "type": "string",
+                        "maxLength": 100,
+                        "example": "Clove"
+                    },
+                    "destination": {
+                        "description": "Destination of the travel",
+                        "type": "string",
+                        "example": "Ouro Preto"
+                    },
+                    "start_date": {
+                        "description": "Start date of the travel",
+                        "type": "string",
+                        "format": "date",
+                        "example": "2025-02-10"
+                    },
+                    "end_date": {
+                        "description": "End date of the travel",
+                        "type": "string",
+                        "format": "date",
+                        "example": "2025-02-28"
+                    },
+                    "order_status_id": {
+                        "description": "ID of the order status",
+                        "type": "integer",
+                        "example": 1
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateTravelOrderRequest": {
+                "title": "Update Travel Order Request",
+                "description": "Request body for updating a travel order",
+                "required": [
+                    "travel_order_id",
+                    "order_status_id"
+                ],
+                "properties": {
+                    "travel_order_id": {
+                        "description": "ID of the travel order",
+                        "type": "string",
+                        "example": 1
+                    },
+                    "order_status_id": {
+                        "description": "ID of the order status",
+                        "type": "integer",
+                        "example": 2
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "security": [
+        {
+            "bearerAuth": []
+        }
+    ],
+    "tags": [
+        {
+            "name": "Auth",
+            "description": "Auth"
+        },
+        {
+            "name": "Order Status",
+            "description": "Order Status"
+        },
+        {
+            "name": "Travel Orders",
+            "description": "Travel Orders"
+        }
+    ]
 }
