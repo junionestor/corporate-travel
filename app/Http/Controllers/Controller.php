@@ -15,6 +15,7 @@ namespace App\Http\Controllers;
  *   ),
  *
  *  @OA\Components(
+ *
  *   @OA\SecurityScheme(
  *     securityScheme="bearerAuth",
  *     type="http",
@@ -23,7 +24,7 @@ namespace App\Http\Controllers;
  *   )
  *  ),
  *   security={
-*       {"bearerAuth": {}}
+ *       {"bearerAuth": {}}
  *   },
  *
  *   @OA\PathItem(path="/api")

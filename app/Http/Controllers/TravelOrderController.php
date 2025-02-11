@@ -46,6 +46,7 @@ class TravelOrderController extends Controller
      *         description="End date of the travel order",
      *         required=false,
      *         example="2025-01-28",
+     *
      *         @OA\Schema(type="string", format="date")
      *     ),
      *
