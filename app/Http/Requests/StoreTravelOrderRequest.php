@@ -71,12 +71,16 @@ class StoreTravelOrderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'travel_order_id' => ['required'],
+            'travel_order_id' => ['required', 'string'],
             'name' => ['required', 'string', 'max:100'],
             'destination' => ['required', 'string'],
             'start_date' => ['required', 'date', 'date_format:Y-m-d'],
             'end_date' => ['required', 'date', 'date_format:Y-m-d'],
-            'order_status_id' => ['required', 'exists:order_statuses,id'],
+            'order_status_id' => [
+                'required',
+                "integer",
+                'exists:order_statuses,id'
+            ],
         ];
     }
 

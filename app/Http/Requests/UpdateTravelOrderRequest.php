@@ -46,11 +46,12 @@ class UpdateTravelOrderRequest extends FormRequest
         return [
             'travel_order_id' => [
                 'required',
+                'string',
                 'exists:travel_orders,travel_order_id',
             ],
             'order_status_id' => [
-                'integer',
                 'required',
+                'integer',
                 'exists:order_statuses,id',
             ],
         ];
