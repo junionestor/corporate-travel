@@ -14,10 +14,10 @@ class TravelOrder extends Model
         'travel_order_id',
         'name',
         'destination',
-        'user_id',
         'start_date',
         'end_date',
         'order_status_id',
+        'user_id',
     ];
 
     public function orderStatus()

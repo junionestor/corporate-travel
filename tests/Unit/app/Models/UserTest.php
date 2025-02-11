@@ -11,7 +11,7 @@ class UserTest extends TestCase
     #[Test]
     public function it_has_fillable_fields(): void
     {
-        $user = new User();
+        $user = new User;
 
         $this->assertEquals(
             [
@@ -26,7 +26,7 @@ class UserTest extends TestCase
     #[Test]
     public function it_has_hidden_fields(): void
     {
-        $user = new User();
+        $user = new User;
 
         $this->assertEquals(
             [
@@ -40,7 +40,7 @@ class UserTest extends TestCase
     #[Test]
     public function it_has_casts(): void
     {
-        $user = new User();
+        $user = new User;
 
         $this->assertEquals(
             [

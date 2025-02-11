@@ -11,7 +11,7 @@ class IndexTravelOrderRequestTest extends TestCase
     #[Test]
     public function validations(): void
     {
-        $request = new IndexTravelOrderRequest();
+        $request = new IndexTravelOrderRequest;
 
         $expectedRules = [
             'order_status_id' => [

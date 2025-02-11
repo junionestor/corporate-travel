@@ -78,8 +78,8 @@ class StoreTravelOrderRequest extends FormRequest
             'end_date' => ['required', 'date', 'date_format:Y-m-d'],
             'order_status_id' => [
                 'required',
-                "integer",
-                'exists:order_statuses,id'
+                'integer',
+                'exists:order_statuses,id',
             ],
         ];
     }
@@ -94,15 +94,5 @@ class StoreTravelOrderRequest extends FormRequest
         return [
             'order_status_id.exists' => 'The order status does not exist.',
         ];
-    }
-
-    /**
-     * Prepare the data for validation.
-     */
-    protected function prepareForValidation(): void
-    {
-        $this->merge([
-            'user_id' => $this->user()->id,
-        ]);
     }
 }

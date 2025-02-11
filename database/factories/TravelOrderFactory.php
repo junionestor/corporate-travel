@@ -19,11 +19,12 @@ class TravelOrderFactory extends Factory
         $date = now();
 
         return [
-            'order_status_id' => 1,
+            'travel_order_id' => $this->faker->uuid,
             'name' => $this->faker->name,
             'destination' => $this->faker->city,
-            'start_date' => $date,
-            'end_date' => $date->addDays(5),
+            'start_date' => $date->toDateString(),
+            'end_date' => $date->addDays(5)->toDateString(),
+            'order_status_id' => 1,
         ];
     }
 }

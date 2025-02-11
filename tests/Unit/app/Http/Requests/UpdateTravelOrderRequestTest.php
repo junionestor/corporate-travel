@@ -11,7 +11,7 @@ class UpdateTravelOrderRequestTest extends TestCase
     #[Test]
     public function validations(): void
     {
-        $request = new UpdateTravelOrderRequest();
+        $request = new UpdateTravelOrderRequest;
 
         $expectedRules = [
             'travel_order_id' => [
